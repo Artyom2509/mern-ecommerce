@@ -31,7 +31,6 @@
 
 ## Project Overview
 
-Master MERN Stack Web Development building Ultimate E-commerce app with React Redux Ant Design Firebase NodeJs and MongoDB. This project will have almost all the features you want to add in any E-commerce app including:
 - Login Registration System
 - Login with email/password and social login (Google)
 - Admin dashboard and order management system
