@@ -29,13 +29,16 @@ const AdminProductCard = ({ product, handleDelete }) => {
 					/>,
 				]}>
 				<Meta
-					title={`${product.title} - $${product.price}`}
+					title={`${product.title}`}
 					description={
 						description.length > 30
 							? description.substr(0, 30) + '...'
 							: description
 					}
 				/>
+				<div className="d-flex">
+					<strong className="mt-2">{`$${product.price}`}</strong>
+				</div>
 			</Card>
 		</div>
 	);

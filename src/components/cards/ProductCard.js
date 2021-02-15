@@ -53,7 +53,7 @@ const ProductCard = ({ product, loading = false, size = 'col-md-3' }) => {
 				<Meta
 					title={
 						<div>
-							{product.title} - ${product.price}{' '}
+							{product.title}{' '}
 							{product.quantity < 1 && (
 								<span className="bg-danger p-2"> Sold </span>
 							)}
@@ -65,9 +65,17 @@ const ProductCard = ({ product, loading = false, size = 'col-md-3' }) => {
 							: description
 					}
 				/>
+				<div className="d-flex">
+					<strong className="mt-2">{`$${prettify(product.price)}`}</strong>
+				</div>
 			</Card>
 		</div>
 	);
 };
+
+function prettify(num) {
+	var n = num.toString();
+	return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, '$1' + ' ');
+}
 
 export default ProductCard;

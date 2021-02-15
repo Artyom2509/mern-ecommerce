@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LoadingToRedirect from './LoadingToRedirect';
 import axios from '../../server/axios';
-import { toast } from 'react-toastify';
 
 const AdminRoute = ({ children, ...rest }) => {
 	const user = useSelector((state) => state.user);

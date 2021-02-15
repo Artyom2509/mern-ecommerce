@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import LoadingCard from '../components/cards/LoadingCard';
@@ -17,28 +17,17 @@ import Star from '../components/forms/Star';
 const { SubMenu } = Menu;
 
 const Shop = () => {
+	const brands = useRef(['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'ASUS']);
+	const colors = useRef(['Black', 'Brown', 'Silver', 'White', 'Blue']);
+	const shippings = useRef(['Yes', 'No']);
 	const [products, setProducts] = useState([]);
+	console.log('Shop -> products', products);
 	const [price, setPrice] = useState([0, 0]);
 	const [loading, setLoading] = useState(false);
 	const [ok, setOk] = useState(false);
 	const [categories, setCategories] = useState([]);
 	const [allSubs, setAllSubs] = useState([]);
 	const [categoryIds, setCategoryIds] = useState([]);
-	const [brands, setBrands] = useState([
-		'Apple',
-		'Samsung',
-		'Microsoft',
-		'Lenovo',
-		'ASUS',
-	]);
-	const [colors, setColors] = useState([
-		'Black',
-		'Brown',
-		'Silver',
-		'White',
-		'Blue',
-	]);
-	const [shippings, setShippings] = useState(['Yes', 'No']);
 	const [shipping, setshipping] = useState('');
 	const [brand, setBrand] = useState('');
 	const [color, setColor] = useState('');
@@ -61,8 +50,8 @@ const Shop = () => {
 	}, [text]);
 
 	useEffect(() => {
-		fetchProductsByFilter({ price });
-	}, [ok]);
+		if (ok) fetchProductsByFilter({ price });
+	}, [ok, price]);
 
 	const loadAllProducts = async (count) => {
 		setLoading(true);
@@ -141,7 +130,9 @@ const Shop = () => {
 		if (foundInTheState === -1) inTheState.push(value);
 		else inTheState.splice(foundInTheState, 1);
 
+		
 		setCategoryIds(inTheState);
+		if (!inTheState.length) return loadAllProducts(12);
 		fetchProductsByFilter({ category: inTheState });
 	};
 
@@ -317,7 +308,7 @@ const Shop = () => {
 								</span>
 							}>
 							<div className="pb-2">
-								{brands.map((name, i) => (
+								{brands.current.map((name, i) => (
 									<Radio
 										className="pb-1 pl-4 pr-5 d-block"
 										key={i}
@@ -340,7 +331,7 @@ const Shop = () => {
 								</span>
 							}>
 							<div className="pb-2">
-								{colors.map((name, i) => (
+								{colors.current.map((name, i) => (
 									<Radio
 										className="pb-1 pl-4 pr-4 d-block"
 										key={i}
@@ -363,7 +354,7 @@ const Shop = () => {
 								</span>
 							}>
 							<div className="pb-2">
-								{shippings.map((name, i) => (
+								{shippings.current.map((name, i) => (
 									<Radio
 										className="pb-1 pl-4 pr-4 d-block"
 										key={i}
