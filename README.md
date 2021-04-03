@@ -1,6 +1,6 @@
 # [MERN E-Commerce](https://app-ecommerce-mern.herokuapp.com/)
 
-## Course Highlights
+## Highlights
 - React Client (Frontend)
 - Firebase Authentication and Redux
 - Node MongoDB API (Backend)
